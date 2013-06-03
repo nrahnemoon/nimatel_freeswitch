@@ -17,7 +17,7 @@ old_library=''
 inherited_linker_flags=' -pthread'
 
 # Libraries that this one depends upon.
-dependency_libs=' -L/usr/src/freeswitch/libs/esl -lesl /usr/local/freeswitch/lib/libfreeswitch.la -L/usr/src/freeswitch/libs/apr-util/xml/expat/lib /usr/local/freeswitch/lib/libexpat.la /usr/local/freeswitch/lib/libapr-1.la -luuid -lpthread -lz -ldl -lcrypt -lrt /usr/lib/libjpeg.la /usr/lib/libodbc.la -lssl -lcrypto -lncurses /usr/lib/libjpeg.la /usr/lib/libodbc.la'
+dependency_libs=' -L/usr/local/src/freeswitch/libs/esl -lesl /usr/local/freeswitch/lib/libfreeswitch.la -L/usr/lib/mit-krb5 -L/usr/lib//mit-krb5 -L/usr/lib -L/usr/local/src/freeswitch/libs/apr-util/xml/expat/lib /usr/local/freeswitch/lib/libexpat.la /usr/local/freeswitch/lib/libapr-1.la -luuid -lpthread -lz -ldl -lcrypt -lrt -lssl -lcrypto -lncurses /usr/lib/libjpeg.la -lpq /usr/lib/libodbc.la'
 
 # Names of additional weak libraries provided by this library
 weak_library_names=''

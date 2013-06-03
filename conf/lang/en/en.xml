@@ -7,6 +7,7 @@
         <X-PRE-PROCESS cmd="include" data="vm/sounds.xml"/> <!-- vm/tts.xml if you want to use tts and have cepstral -->
         <X-PRE-PROCESS cmd="include" data="dir/sounds.xml"/> <!-- dir/tts.xml if you want to use tts and have cepstral -->
         <X-PRE-PROCESS cmd="include" data="ivr/*.xml"/>  <!-- IVR and custom phrases go here -->
+        <X-PRE-PROCESS cmd="include" data="nimatel/*.xml"/>  <!-- Nimatel phrases go here -->
       </macros>
       <X-PRE-PROCESS cmd="include" data="vm/voicemail_ivr.xml"/>
     </phrases>
