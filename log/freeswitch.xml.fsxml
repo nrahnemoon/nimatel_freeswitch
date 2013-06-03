@@ -5292,6 +5292,12 @@ the sip-server-addr and sip-server-port to the oreka server
     </condition>
   </extension>
 
+  <extension name="nimatel_ivr">
+    <condition field="destination_number" expression="^9999$">
+      <action application="lua" data="nimatel.lua"/>
+    </condition>
+  </extension>
+
     
     <!--
     <extension name="refer">
