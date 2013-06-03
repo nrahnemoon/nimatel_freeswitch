@@ -7609,6 +7609,17 @@ End:
 For VIM:
 vim:set softtabstop=2 shiftwidth=2 tabstop=2 expandtab:
 -->
+  <macro name="welcome_enter_pin_cc">
+    <input pattern="(.*)">
+      <match>
+        <action function="execute" data="sleep(400)"/>
+        <action function="play-file" data="nimatel/welcome.wav"/>
+        <action function="execute" data="sleep(400)"/>
+        <action function="play-file" data="nimatel/enter_pin_cc.wav"/>
+      </match>
+    </input>
+  </macro>
+
       </macros>
 
   <macros name="voicemail_ivr">
