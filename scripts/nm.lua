@@ -1,4 +1,3 @@
-require('nm-lib');
 require('nm-db');
 require('nm-ivr');
 

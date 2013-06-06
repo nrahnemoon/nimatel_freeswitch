@@ -1,5 +1,5 @@
-require('nm-lib')
 require('nm-account')
+require('nm-lib')
 
 local dbDsn = "pgsql://hostaddr=127.0.0.1 dbname=nimatel_production user=nimatel password=m0rt3l";
 
@@ -19,14 +19,15 @@ function Db.connect()
 end
 
 function Db:lookupAccount(num)
-  dbh:query("SELECT * FROM cards WHERE pin='" .. digits .. "';",
+  local account;
+  self.dbh:query("SELECT * FROM cards WHERE pin='" .. num .. "';",
     function(acct)
       if tableLength(acct) >= 1 then
         account = Account.init(acct.pin, acct.balance);
-        return account;
       else
-        return nil;
+        account = nil;
       end
     end);
+  return account;
 end
 

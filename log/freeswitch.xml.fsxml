@@ -7631,6 +7631,16 @@ vim:set softtabstop=2 shiftwidth=2 tabstop=2 expandtab:
       </match>
     </input>
   </macro>
+  <macro name="invalid_entry_try_again">
+    <input pattern="(.*)">
+      <match>
+        <action function="execute" data="sleep(400)"/>
+        <action function="play-file" data="nimatel/invalid_entry.wav"/>
+        <action function="execute" data="sleep(400)"/>
+        <action function="play-file" data="nimatel/try_again.wav"/>
+      </match>
+    </input>
+  </macro>
   <macro name="nimatel_down_call_back_later">
     <input pattern="(.*)">
       <match>
@@ -7638,6 +7648,17 @@ vim:set softtabstop=2 shiftwidth=2 tabstop=2 expandtab:
         <action function="play-file" data="nimatel/nimatel_down.wav"/>
         <action function="execute" data="sleep(400)"/>
         <action function="play-file" data="nimatel/call_back_later.wav"/>
+      </match>
+    </input>
+  </macro>
+  <macro name="read_balance">
+    <input pattern="(.*)">
+      <match>
+        <action function="execute" data="sleep(400)"/>
+        <action function="play-file" data="nimatel/thank_you.wav"/>
+        <action function="execute" data="sleep(400)"/>
+        <action function="play-file" data="nimatel/balance_is.wav"/>
+        <action function="say" data="$1" method="pronounced" type="currency"/>
       </match>
     </input>
   </macro>
