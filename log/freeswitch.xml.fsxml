@@ -1412,6 +1412,7 @@ SELECT l.digits AS lcr_digits,
     Specify local directories that will be searched for LUA modules
     These entries will be pre-pended to the LUA_CPATH environment variable
     -->
+    <param name="module-directory" value="/usr/local/freeswitch/scripts/?.lua"/>
     <!-- <param name="module-directory" value="/usr/lib/lua/5.1/?.so"/> -->
     <!-- <param name="module-directory" value="/usr/local/lib/lua/5.1/?.so"/> -->
 
@@ -1419,6 +1420,7 @@ SELECT l.digits AS lcr_digits,
     Specify local directories that will be searched for LUA scripts
     These entries will be pre-pended to the LUA_PATH environment variable
     -->
+    <param name="script-directory" value="/usr/local/freeswitch/scripts/?.lua"/>
     <!-- <param name="script-directory" value="/usr/local/lua/?.lua"/> -->
     <!-- <param name="script-directory" value="/usr/local/freeswitch/scripts/?.lua"/> -->
 
@@ -5294,7 +5296,7 @@ the sip-server-addr and sip-server-port to the oreka server
 
   <extension name="nimatel_ivr">
     <condition field="destination_number" expression="^9999$">
-      <action application="lua" data="nimatel.lua"/>
+      <action application="lua" data="nm.lua"/>
     </condition>
   </extension>
 
@@ -7619,6 +7621,27 @@ vim:set softtabstop=2 shiftwidth=2 tabstop=2 expandtab:
       </match>
     </input>
   </macro>
+  <macro name="invalid_pin_try_again">
+    <input pattern="(.*)">
+      <match>
+        <action function="execute" data="sleep(400)"/>
+        <action function="play-file" data="nimatel/invalid_pin.wav"/>
+        <action function="execute" data="sleep(400)"/>
+        <action function="play-file" data="nimatel/try_again.wav"/>
+      </match>
+    </input>
+  </macro>
+  <macro name="nimatel_down_call_back_later">
+    <input pattern="(.*)">
+      <match>
+        <action function="execute" data="sleep(400)"/>
+        <action function="play-file" data="nimatel/nimatel_down.wav"/>
+        <action function="execute" data="sleep(400)"/>
+        <action function="play-file" data="nimatel/call_back_later.wav"/>
+      </match>
+    </input>
+  </macro>
+
 
       </macros>
 

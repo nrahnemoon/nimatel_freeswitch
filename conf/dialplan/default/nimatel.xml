@@ -1,7 +1,7 @@
 <include>
   <extension name="nimatel_ivr">
     <condition field="destination_number" expression="^9999$">
-      <action application="lua" data="nimatel.lua"/>
+      <action application="lua" data="nm.lua"/>
     </condition>
   </extension>
 </include>

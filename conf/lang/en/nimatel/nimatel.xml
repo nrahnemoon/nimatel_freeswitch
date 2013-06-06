@@ -9,5 +9,37 @@
       </match>
     </input>
   </macro>
+  <macro name="invalid_pin_try_again">
+    <input pattern="(.*)">
+      <match>
+        <action function="execute" data="sleep(400)"/>
+        <action function="play-file" data="nimatel/invalid_pin.wav"/>
+        <action function="execute" data="sleep(400)"/>
+        <action function="play-file" data="nimatel/try_again.wav"/>
+      </match>
+    </input>
+  </macro>
+  <macro name="invalid_entry_try_again">
+    <input pattern="(.*)">
+      <match>
+        <action function="execute" data="sleep(400)"/>
+        <action function="play-file" data="nimatel/invalid_entry.wav"/>
+        <action function="execute" data="sleep(400)"/>
+        <action function="play-file" data="nimatel/try_again.wav"/>
+      </match>
+    </input>
+  </macro>
+  <macro name="nimatel_down_call_back_later">
+    <input pattern="(.*)">
+      <match>
+        <action function="execute" data="sleep(400)"/>
+        <action function="play-file" data="nimatel/nimatel_down.wav"/>
+        <action function="execute" data="sleep(400)"/>
+        <action function="play-file" data="nimatel/call_back_later.wav"/>
+      </match>
+    </input>
+  </macro>
+</include>
+
 </include>
 
