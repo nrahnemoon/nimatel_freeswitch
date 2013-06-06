@@ -39,6 +39,17 @@
       </match>
     </input>
   </macro>
+  <macro name="read_balance">
+    <input pattern="(.*)">
+      <match>
+        <action function="execute" data="sleep(400)"/>
+        <action function="play-file" data="nimatel/thank_you.wav"/>
+        <action function="execute" data="sleep(400)"/>
+        <action function="play-file" data="nimatel/balance_is.wav"/>
+        <action function="say" data="$1" method="pronounced" type="currency"/>
+      </match>
+    </input>
+  </macro>
 </include>
 
 </include>

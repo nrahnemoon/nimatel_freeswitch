@@ -1,3 +1,5 @@
+require('nm-account')
+require('nm-db')
 require('nm-lib')
 
 Ivr = {};
@@ -19,32 +21,47 @@ function Ivr:testDigits(digits)
 end
 
 function Ivr:start()
-  local digits = session:playAndGetDigits(1, 12, 1, 3000, "",
+  local digits = session:playAndGetDigits(1, 12, 1, 4000, "",
       "phrase:welcome_enter_pin_cc", "", "\\d+");
-  self:handleStart(digit);
+  self:handleStart(digits);
 end
 
 function Ivr:handleStart(digits)
   self:testDigits(digits);
   if digits == "1" then
     self:newAccount();
-  elseif tableLength(digits == 12) then
+  elseif digits:len() == 12 then
     self:accountLookup(digits);
+    self:readBalance();
+    self:getDestination();
   else
     local digits = session:playAndGetDigits(1, 12, 1, 3000, "",
-        "phrase:welcome_enter_pin_cc", "", "\\d+");
-    self:handleStart(digit);
+        "phrase:invalid_entry_try_again", "", "\\d+");
+    self:handleStart(digits);
   end
 end
 
 function Ivr:accountLookup(digits)
   self.account = self.db:lookupAccount(digits);
   if self.account == nil then
-    session:
+    local digits = session:playAndGetDigits(1, 12, 1, 3000, "",
+        "phrase:invalid_pin_try_again", "", "\\d+");
+    self:handleStart(digits);
   end
+end
+
+function Ivr:readBalance()
+  session:sayPhrase("read_balance", self.account.balance, "en");
+end
+
+function Ivr:getDestination()
+  local digits = session:playAndGetDigits(1, 12, 1, 3000, "",
+        "phrase:invalid_pin_try_again", "", "\\d+");
 end
 
 function Ivr:transferToOperator()
   -- TODO(nima)
+  session:hangup();
+  exit();
 end
 
