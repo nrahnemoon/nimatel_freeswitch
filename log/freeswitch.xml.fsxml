@@ -7651,7 +7651,7 @@ vim:set softtabstop=2 shiftwidth=2 tabstop=2 expandtab:
       </match>
     </input>
   </macro>
-  <macro name="read_balance">
+  <macro name="read_balance_enter_destination">
     <input pattern="(.*)">
       <match>
         <action function="execute" data="sleep(400)"/>
@@ -7659,10 +7659,10 @@ vim:set softtabstop=2 shiftwidth=2 tabstop=2 expandtab:
         <action function="execute" data="sleep(400)"/>
         <action function="play-file" data="nimatel/balance_is.wav"/>
         <action function="say" data="$1" method="pronounced" type="currency"/>
+        <action function="play-file" data="nimatel/enter_destination.wav"/>
       </match>
     </input>
   </macro>
-
 
       </macros>
 

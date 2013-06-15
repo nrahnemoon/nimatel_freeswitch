@@ -32,8 +32,7 @@ function Ivr:handleStart(digits)
     self:newAccount();
   elseif digits:len() == 12 then
     self:accountLookup(digits);
-    self:readBalance();
-    self:getDestination();
+    self:readBalanceGetDestination();
   else
     local digits = session:playAndGetDigits(1, 12, 1, 3000, "",
         "phrase:invalid_entry_try_again", "", "\\d+");
@@ -55,8 +54,8 @@ function Ivr:readBalance()
 end
 
 function Ivr:getDestination()
-  local digits = session:playAndGetDigits(1, 12, 1, 3000, "",
-        "phrase:invalid_pin_try_again", "", "\\d+");
+  local digits = session:playAndGetDigits(1, 128, 1, 4000, "#",
+        "phrase:read_balance_enter_destination", "", "\\d+");
 end
 
 function Ivr:transferToOperator()
