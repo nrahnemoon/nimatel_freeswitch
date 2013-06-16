@@ -1,5 +1,6 @@
 require('nm-account')
 require('nm-lib')
+require('nm-wrate')
 
 local dbDsn = "pgsql://hostaddr=127.0.0.1 dbname=nimatel_production user=nimatel password=m0rt3l";
 
@@ -31,3 +32,23 @@ function Db:lookupAccount(num)
   return account;
 end
 
+function Db:lookupRegion(num)
+  local region;
+  self.dbh:query("SELECT id FROM regions WHERE '"
+      .. num .. "' LIKE prefix || '%' ORDER BY prefix DESC LIMIT 1;",
+    function(loc)
+      region = loc.id;
+    end);
+  return region;
+end
+
+function Db:lookupBestRate(num)
+  local wrate;
+  self:dbc:query("SELECT * FROM wholesaler_rates WHERE '" .. num ..
+      "' LIKE prefix || '%' ORDER BY rate ASC LIMIT 1;",
+    function(rate)
+      wrate = WholesalerRate.init(rate.id, rate.rate, rate.billing_increment, rate.min_charge);
+    end)
+  return wrate;
+end
+  

@@ -47,7 +47,17 @@
         <action function="execute" data="sleep(400)"/>
         <action function="play-file" data="nimatel/balance_is.wav"/>
         <action function="say" data="$1" method="pronounced" type="currency"/>
+        <action function="execute" data="sleep(400)"/>
         <action function="play-file" data="nimatel/enter_destination.wav"/>
+      </match>
+    </input>
+  </macro>
+  <macro name="back_main_menu_or_ready_cc">
+    <input pattern="(.*)">
+      <match>
+        <action function="play-file" data="nimatel/back_to_main_menu.wav"/>
+        <action function="execute" data="sleep(400)"/>
+        <action function="play-file" data="nimatel/or_ready_cc.wav"/>
       </match>
     </input>
   </macro>

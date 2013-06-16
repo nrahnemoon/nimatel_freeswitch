@@ -213,6 +213,7 @@
   -->
 
   <!-- Internal SIP Profile -->
+  <!-- NIMA CHANGED -->
 
 
   <!-- External SIP Profile -->
@@ -2367,7 +2368,7 @@ the sip-server-addr and sip-server-port to the oreka server
     <!--<param name="NDLB-broken-auth-hash" value="true"/>-->
     <!-- add a ;received="<ip>:<port>" to the contact when replying to register for nat handling -->
     <!--<param name="NDLB-received-in-nat-reg-contact" value="true"/>-->
-    <param name="auth-calls" value="true"/>
+    <param name="auth-calls" value="false"/>
     <!-- on authed calls, authenticate *all* the packets not just invite -->
     <param name="auth-all-packets" value="false"/>
     <!-- <param name="ext-rtp-ip" value="stun:stun.freeswitch.org"/> -->
@@ -2536,7 +2537,7 @@ the sip-server-addr and sip-server-port to the oreka server
     <!-- ip address to bind to, DO NOT USE HOSTNAMES ONLY IP ADDRESSES -->
     <param name="sip-ip" value="74.207.241.131"/>
     <param name="hold-music" value="local_stream://moh"/>
-    <param name="apply-nat-acl" value="nat.auto"/>
+    <!-- <param name="apply-nat-acl" value="nat.auto"/> -->
 
 
     <!-- (default true) set to false if you do not wish to have called party info in 1XX responses -->
@@ -2694,7 +2695,7 @@ the sip-server-addr and sip-server-port to the oreka server
     <!--<param name="NDLB-broken-auth-hash" value="true"/>-->
     <!-- add a ;received="<ip>:<port>" to the contact when replying to register for nat handling -->
     <!--<param name="NDLB-received-in-nat-reg-contact" value="true"/>-->
-    <param name="auth-calls" value="true"/>
+    <param name="auth-calls" value="false"/>
     <!-- Force the user and auth-user to match. -->
     <param name="inbound-reg-force-matching-username" value="true"/>
     <!-- on authed calls, authenticate *all* the packets not just invite -->
@@ -7659,6 +7660,7 @@ vim:set softtabstop=2 shiftwidth=2 tabstop=2 expandtab:
         <action function="execute" data="sleep(400)"/>
         <action function="play-file" data="nimatel/balance_is.wav"/>
         <action function="say" data="$1" method="pronounced" type="currency"/>
+        <action function="execute" data="sleep(400)"/>
         <action function="play-file" data="nimatel/enter_destination.wav"/>
       </match>
     </input>

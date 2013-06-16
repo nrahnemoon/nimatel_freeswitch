@@ -95,7 +95,7 @@
     <!-- ip address to bind to, DO NOT USE HOSTNAMES ONLY IP ADDRESSES -->
     <param name="sip-ip" value="$${local_ip_v4}"/>
     <param name="hold-music" value="$${hold_music}"/>
-    <param name="apply-nat-acl" value="nat.auto"/>
+    <!-- <param name="apply-nat-acl" value="nat.auto"/> -->
 
 
     <!-- (default true) set to false if you do not wish to have called party info in 1XX responses -->

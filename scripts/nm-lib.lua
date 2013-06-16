@@ -4,3 +4,7 @@ function tableLength(T)
   return count
 end
 
+function string.starts(main, prefix)
+   return string.sub(main, 1, string.len(prefix)) == prefix
+end
+
