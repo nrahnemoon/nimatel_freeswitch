@@ -1,5 +1,7 @@
-require('nm-account')
+require('nm-card')
 require('nm-lib')
+require('nm-phone')
+require('nm-user')
 require('nm-wrate')
 
 local dbDsn = "pgsql://hostaddr=127.0.0.1 dbname=nimatel_production user=nimatel password=m0rt3l";
@@ -19,36 +21,47 @@ function Db.connect()
   return db;
 end
 
-function Db:lookupAccount(num)
-  local account;
-  self.dbh:query("SELECT * FROM cards WHERE pin='" .. num .. "';",
-    function(acct)
-      if tableLength(acct) >= 1 then
-        account = Account.init(acct.pin, acct.balance);
+function Db:getCardByPin(pin)
+  local card;
+  self.dbh:query("SELECT * FROM cards WHERE pin='" .. pin .. "';",
+    function(c)
+      if tableLength(c) >= 1 then
+        card = Card.init(c.pin, c.balance);
       else
-        account = nil;
+        card = nil;
       end
     end);
-  return account;
+  return card;
 end
 
-function Db:lookupRegion(num)
+function Db:getRegionByPrefix(prefix)
   local region;
   self.dbh:query("SELECT id FROM regions WHERE '"
-      .. num .. "' LIKE prefix || '%' ORDER BY prefix DESC LIMIT 1;",
-    function(loc)
-      region = loc.id;
+      .. prefix .. "' LIKE prefix || '%' ORDER BY prefix DESC LIMIT 1;",
+    function(r)
+      region = r.id;
     end);
   return region;
 end
 
-function Db:lookupBestRate(num)
-  local wrate;
-  self:dbc:query("SELECT * FROM wholesaler_rates WHERE '" .. num ..
+function Db:getBestRateByPrefix(prefix)
+  local rate;
+  self.dbc:query("SELECT * FROM wholesaler_rates WHERE '" .. prefix ..
       "' LIKE prefix || '%' ORDER BY rate ASC LIMIT 1;",
-    function(rate)
-      wrate = WholesalerRate.init(rate.id, rate.rate, rate.billing_increment, rate.min_charge);
-    end)
-  return wrate;
+    function(r)
+      rate = WholesalerRate.init(r.id, r.rate, r.billing_increment, r.min_charge);
+    end);
+  return rate;
 end
-  
+
+function Db:getUserByNumber(number)
+  local user;
+  self.dbc:query("SELECT User.id, User.email, User.cim_profile_id, User.defaultPaymentProfileId, PhoneNumber.number, PhoneNumber.remember" ..
+    " FROM phone_numbers JOIN users ON phone_number.user_id = user.id WHERE PhoneNumber.number='" .. number .. "';",
+    function(u)
+      user = User.init(u.email, u.cim_profile_id, u.default_payment_profile_id);
+      user.addPhoneNumber(Phone.init(u.number, u.remember, u.id));
+      return user;
+    end);
+end
+

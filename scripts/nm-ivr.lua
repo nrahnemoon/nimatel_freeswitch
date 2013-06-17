@@ -88,6 +88,8 @@ end
 function Ivr:handleReadCcNum(digits)
   self:testDigits(digits);
   if !Cc.validateNumber(digits) then
-  elseif !Cc.validBrand(digits) then
+    
+  else
+    
   end
 end 
